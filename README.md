@@ -1,0 +1,1 @@
+# CM2026 Editor: Database Editor for Champions Manager 2026
