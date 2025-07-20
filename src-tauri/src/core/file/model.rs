@@ -1,18 +1,16 @@
-use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug)]
-pub struct File {
+#[derive(Debug, Serialize, Deserialize)]
+pub struct DatabaseFile {
   name: String,
   edition: i32,
-  created_at: DateTime<Utc>,
 }
 
-impl File {
+impl DatabaseFile {
   pub fn new(name: String, edition: i32) -> Self {
     Self {
       name: name,
       edition: edition,
-      created_at: Utc::now()
     }
   }
 }
