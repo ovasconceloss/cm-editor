@@ -493,6 +493,7 @@ name = "cm-editor"
 version = "1.0.0"
 dependencies = [
  "chrono",
+ "dirs",
  "rand 0.9.1",
  "serde",
  "serde_json",
