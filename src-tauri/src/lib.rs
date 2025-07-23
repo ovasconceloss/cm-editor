@@ -4,7 +4,14 @@ pub mod state;
 pub mod use_cases;
 
 use std::sync::Mutex;
-use crate::{app::commands::{file::commands::{new_file, set_file}, system::commands::exit_app}, state::DatabaseState};
+use crate::{app::commands::{
+    file::commands::{
+        new_file, 
+        set_file, 
+        get_current_file
+    }, 
+    system::commands::exit_app
+}, state::DatabaseState};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -17,6 +24,7 @@ pub fn run() {
             new_file,
             set_file,
             exit_app,
+            get_current_file,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

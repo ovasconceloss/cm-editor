@@ -15,3 +15,8 @@ pub fn set(database_path: String, state: State<'_, SharedDatabase>) {
   let mut database = state.lock().unwrap();
   database.database_path = database_path;
 }
+
+pub fn get_current(state: State<'_, SharedDatabase>) -> String {
+  let application_state = state.lock().unwrap();
+  application_state.database_path.clone()
+}
