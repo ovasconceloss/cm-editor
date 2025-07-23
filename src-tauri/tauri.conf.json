@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "CM2026 Editor",
+        "title": "CM2026",
         "width": 800,
         "height": 600,
         "fullscreen": true,
