@@ -1,4 +1,4 @@
-import Home from "@/screens/Home";
+import Home from "@/screens/Home/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function AppRoutes() {
