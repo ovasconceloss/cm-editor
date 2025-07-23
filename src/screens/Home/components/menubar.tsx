@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { invoke } from "@tauri-apps/api/core";
 import { Dialog } from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
+import { useDatabase } from "@/contexts/DatabaseContext";
 import { Database, FileOutput, FileQuestion, Github, LogOut, Plus, Redo, Undo } from "lucide-react";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from "@/components/ui/menubar";
@@ -14,22 +15,38 @@ interface Error {
 }
 
 function Menu() {
+  const { setDatabaseName } = useDatabase();
   const [error, setError] = useState<Error>();
   const [open, setOpen] = useState<boolean>(false);
   const [filename, setFilename] = useState<string>();
 
   async function handleClick() {
-    if (filename == undefined) {
+    if (!filename?.trim()) {
       setError({status: true, message: "The database must have a defined name"});
       toast.error("Failed to create a new database file", { description: "The database must have a defined name" })
       return;
     }
 
-    const path = await invoke("new_file", { name: filename });
-    await invoke("set_file", { databasePath: path });
-    
-    setOpen(false);
-    toast.success("Database successfully created");
+    try {
+      if (localStorage.getItem("database_name"))
+        localStorage.removeItem("database_name");
+
+      const path = await invoke("new_file", { name: filename });
+      await invoke("set_file", { databasePath: path });
+
+      const database = await invoke("get_current_file");
+      localStorage.setItem('database_name', JSON.stringify(database));
+
+      const databaseName = localStorage.getItem("database_name");
+      setDatabaseName(JSON.parse(databaseName ? databaseName : ""));
+      
+      setOpen(false);
+      toast.success("Database successfully created");
+    } catch (err: unknown) {
+      toast.error("Failed to create database", {
+        description: error?.message || "An unexpected error occurred",
+      });
+    }    
   }
 
   function handleExit() {
