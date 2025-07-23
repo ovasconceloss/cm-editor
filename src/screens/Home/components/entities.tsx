@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ResizablePanel } from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ArrowRight } from "lucide-react";
 
 interface EntitiesPanelInterface {
   isSelected: string,
@@ -21,22 +22,22 @@ function EntitiesPanel({isSelected, setIsSelected}: EntitiesPanelInterface) {
             variant="ghost" 
             className={`w-full justify-start ${isSelected == "teams" ? 'text-neutral-100 bg-neutral-800' : ''} cursor-pointer
             hover:bg-neutral-200`} 
-            onClick={() => handleSelected("teams")}>Teams</Button>
+            onClick={() => handleSelected("teams")}><ArrowRight /> Teams</Button>
           <Button 
             variant="ghost" 
             className={`w-full justify-start ${isSelected == "nations" ? 'text-neutral-100 bg-neutral-800' : ''} cursor-pointer
             hover:bg-neutral-200`} 
-            onClick={() => handleSelected("nations")}>Nations</Button>
+            onClick={() => handleSelected("nations")}><ArrowRight /> Nations</Button>
           <Button 
             variant="ghost" 
             className={`w-full justify-start ${isSelected == "players" ? 'text-neutral-100 bg-neutral-800' : ''} cursor-pointer
             hover:bg-neutral-200`} 
-            onClick={() => handleSelected("players")}>Players</Button>
+            onClick={() => handleSelected("players")}><ArrowRight /> Players</Button>
           <Button 
             variant="ghost" 
             className={`w-full justify-start ${isSelected == "competitions" ? 'text-neutral-100 bg-neutral-800' : ''} cursor-pointer
             hover:bg-neutral-200`} 
-            onClick={() => handleSelected("competitions")}>Competitions</Button>
+            onClick={() => handleSelected("competitions")}><ArrowRight /> Competitions</Button>
         </div>
       </ScrollArea>
     </ResizablePanel>
