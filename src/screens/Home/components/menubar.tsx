@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { invoke } from "@tauri-apps/api/core";
 import { Dialog } from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
-import { Database, FileOutput, LogOut, Plus } from "lucide-react";
+import { Database, FileOutput, FileQuestion, Github, LogOut, Plus, Redo, Undo } from "lucide-react";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from "@/components/ui/menubar";
 
@@ -56,6 +56,20 @@ function Menu() {
             <MenubarItem className="cursor-pointer"><FileOutput /> Open</MenubarItem>
             <MenubarSeparator />
             <MenubarItem className="cursor-pointer" onClick={handleExit}><LogOut /> Exit</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger className="text-center cursor-pointer">Edit</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem className="cursor-pointer"><Undo /> Undo</MenubarItem>
+            <MenubarItem className="cursor-pointer"><Redo /> Redo</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger className="text-center cursor-pointer">Help</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem className="cursor-pointer"><FileQuestion /> About</MenubarItem>
+            <MenubarItem className="cursor-pointer"><Github /> Github</MenubarItem>
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
