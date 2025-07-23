@@ -5,7 +5,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { Dialog } from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import { Database, FileOutput, LogOut, Plus } from "lucide-react";
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from "@/components/ui/menubar";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface Error {
@@ -53,11 +53,7 @@ function Menu() {
               <MenubarItem className="cursor-pointer"><Plus /> New</MenubarItem>
             </DialogTrigger>
             <MenubarItem className="cursor-pointer"><FileOutput /> Open</MenubarItem>
-          </MenubarContent>
-        </MenubarMenu>
-        <MenubarMenu>
-          <MenubarTrigger className="text-center cursor-pointer">Settings</MenubarTrigger>
-          <MenubarContent>
+            <MenubarSeparator />
             <MenubarItem className="cursor-pointer" onClick={handleExit}><LogOut /> Exit</MenubarItem>
           </MenubarContent>
         </MenubarMenu>
