@@ -8,7 +8,7 @@ function Home() {
     <div className="select-none">
       <Menu />
       <ResizablePanelGroup direction="horizontal">
-        <ResizablePanel defaultSize={25}>
+        <ResizablePanel defaultSize={25} minSize={10} maxSize={50}>
           <ScrollArea className="h-full p-4">
             <h2 className="text-lg font-semibold mb-4">Database</h2>
             <div className="space-y-2">
