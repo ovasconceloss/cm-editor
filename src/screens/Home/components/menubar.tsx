@@ -5,8 +5,8 @@ import { invoke } from "@tauri-apps/api/core";
 import { Dialog } from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import { Database, FileOutput, LogOut, Plus } from "lucide-react";
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from "@/components/ui/menubar";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from "@/components/ui/menubar";
 
 interface Error {
   status: boolean,
@@ -18,15 +18,16 @@ function Menu() {
   const [open, setOpen] = useState<boolean>(false);
   const [filename, setFilename] = useState<string>();
 
-  function handleClick() {
+  async function handleClick() {
     if (filename == undefined) {
       setError({status: true, message: "The database must have a defined name"});
       toast.error("Failed to create a new database file", { description: "The database must have a defined name" })
       return;
     }
 
-    invoke("new_file", { name: filename });
-
+    const path = await invoke("new_file", { name: filename });
+    await invoke("set_file", { databasePath: path });
+    
     setOpen(false);
     toast.success("Database successfully created");
   }
