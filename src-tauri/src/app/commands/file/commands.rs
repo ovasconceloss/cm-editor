@@ -1,6 +1,17 @@
-use crate::use_cases::file::file::new;
+use tauri::State;
+use crate::{state::SharedDatabase, use_cases::file::file::{new, set}};
 
 #[tauri::command]
-pub fn new_file(name: String) {
-  let _ = new(name);
+pub fn new_file(name: String) -> String {
+  let _ = new(name.clone());
+
+  match new(name) {
+    Ok(database) => database.display().to_string(),
+    Err(_) => format!("Error")
+  }
+}
+
+#[tauri::command]
+pub fn set_file(database_path: String, state: State<'_, SharedDatabase>) {
+  set(database_path, state);
 }
