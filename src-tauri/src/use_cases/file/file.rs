@@ -1,14 +1,18 @@
 use tauri::State;
 use crate::state::SharedDatabase;
-use std::{fs::File, path::PathBuf};
+use std::{fs::{self, File}, path::PathBuf};
 
-pub fn new(name: String) -> Result<PathBuf, ()> {
+pub fn new(name: String) -> Result<String, ()> {
+  
+  let home_dirs = dirs::home_dir().unwrap();
+  let _ = fs::create_dir_all(PathBuf::from(home_dirs.clone().join("CM2026 Edition")));
+
   let file_name: String = format!("{}.db", name);
-  let file_path: PathBuf = PathBuf::from(&file_name);
+  let file_path = PathBuf::from(home_dirs.clone()).join("CM2026 Edition").join(&file_name);
 
   let _file = File::create(&file_path).unwrap();
 
-  Ok(file_path)
+  Ok(file_name)
 }
 
 pub fn set(database_path: String, state: State<'_, SharedDatabase>) {

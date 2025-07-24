@@ -6,7 +6,7 @@ pub fn new_file(name: String) -> String {
   let _ = new(name.clone());
 
   match new(name) {
-    Ok(database) => database.display().to_string(),
+    Ok(database) => database,
     Err(_) => format!("Error")
   }
 }
